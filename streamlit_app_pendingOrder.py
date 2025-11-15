@@ -11,7 +11,8 @@ st.write("""Order that needs to be field""")
 #name_on_order = st.text_input("Name Of the Smoothie : ")
 #st.write("The Name of your Smoothie will be : ", name_on_order)
 
-session = get_active_session()
+cnx=st.connection("snowflake")
+session = cnx.session()
 my_dataframe = session.table("smoothies.public.orders").filter(col("ORDER_FILLED")==0).collect()
 
 if my_dataframe:
